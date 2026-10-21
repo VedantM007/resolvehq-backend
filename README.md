@@ -1,4 +1,4 @@
-# ResolveHQ — Backend
+# ResolveHQ - Backend
 
 A secure REST API for a role-based customer support and escalation platform, planned with Node.js, Express, TypeScript, and PostgreSQL.
 
@@ -6,7 +6,7 @@ ResolveHQ is a full-stack SaaS portfolio project designed to demonstrate backend
 
 ## Project Status
 
-**Current phase:** Phase 1 — Foundation and Architecture
+**Current phase:** Phase 1 - Foundation and Architecture
 
 The backend application has not yet been implemented. This repository is being prepared for development.
 
