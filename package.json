@@ -8,17 +8,17 @@
   "engines": {
     "node": ">=22.0.0"
   },
-  "scripts": {
-    "dev": "tsx watch src/server.ts",
-    "build": "tsc -p tsconfig.json",
-    "start": "node dist/server.js",
-    "typecheck": "tsc --noEmit",
-    "test": "echo \"Tests not configured yet\" && exit 1",
-    "db:create": "node-pg-migrate create --migration-file-language sql --migrations-dir database/migrations",
-    "db:up": "node-pg-migrate up --migrations-dir database/migrations",
-    "db:down": "node-pg-migrate down --migrations-dir database/migrations",
-    "db:redo": "node-pg-migrate redo --migrations-dir database/migrations"  
-  },
+"scripts": {
+  "dev": "tsx watch src/server.ts",
+  "build": "tsc -p tsconfig.json",
+  "start": "node dist/server.js",
+  "typecheck": "tsc --noEmit",
+  "test": "echo \"Tests not configured yet\" && exit 1",
+  "db:create": "node-pg-migrate create --migration-file-language sql --migrations-dir database/migrations",
+  "db:up": "node-pg-migrate up --migrations-dir database/migrations --config-file database/migrate.config.cjs --envPath .env",
+  "db:down": "node-pg-migrate down --migrations-dir database/migrations --config-file database/migrate.config.cjs --envPath .env",
+  "db:redo": "node-pg-migrate redo --migrations-dir database/migrations --config-file database/migrate.config.cjs --envPath .env"
+},
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^26.6.6",
