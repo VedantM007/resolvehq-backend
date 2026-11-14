@@ -1,6 +1,6 @@
 import express from 'express';
 import { pool } from './config/database.js';
-
+import { validateAccessToken } from './middleware/auth.middleware.js';
 const app = express();
 
 // Global middleware
@@ -33,6 +33,13 @@ app.get('/api/v1/health', async (_req, res) => {
       timestamp: new Date().toISOString()
     });
   }
+});
+
+app.get('/api/v1/auth/test', validateAccessToken, (_req, res) => {
+  return res.status(200).json({
+    success: true,
+    message: 'Access token validated successfully'
+  });
 });
 
 export default app;
