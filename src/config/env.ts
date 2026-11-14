@@ -19,7 +19,9 @@ const envSchema = z.object({
   DB_USER: z.string().min(1),
   DB_PASSWORD: z.string().min(1),
 
-  DB_POOL_MAX: z.coerce.number().int().min(1).max(20).default(5)
+  DB_POOL_MAX: z.coerce.number().int().min(1).max(20).default(5),
+  AUTH0_DOMAIN: z.string().min(1),
+  AUTH0_AUDIENCE: z.string().url()
 });
 
 const result = envSchema.safeParse(process.env);
