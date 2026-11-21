@@ -1,6 +1,8 @@
 import express from 'express';
 import { pool } from './config/database.js';
 import { validateAccessToken } from './middleware/auth.middleware.js';
+import { extractAuth0Identity } from './middleware/auth-identity.middleware.js';
+import { loadCurrentUser } from './middleware/load-current-user.middleware.js';
 const app = express();
 
 // Global middleware
@@ -41,5 +43,30 @@ app.get('/api/v1/auth/test', validateAccessToken, (_req, res) => {
     message: 'Access token validated successfully'
   });
 });
+
+// Protected endpoint - requires an existing active ResolveHQ user
+
+app.get(
+  '/api/v1/auth/me',
+  validateAccessToken,
+  extractAuth0Identity,
+  loadCurrentUser,
+  (_req, res) => {
+    const user = res.locals.currentUser!;
+
+    return res.status(200).json({
+      success: true,
+      message: 'Authenticated user retrieved successfully',
+      data: {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        role: user.role
+      }
+    });
+  }
+);
+
 
 export default app;
